@@ -1,7 +1,44 @@
 {%- extends "clean.html" %}
 
 {% block radio %}
-<div class="bg-info">s
-    <audio src="/ogg">as</audio>
+<div class="bg-info">
+
+    <div>radio_switch
+        <a href="javascript:void(0);" class="btn btn-outline-dark" onclick="sound('Play')">Play</a>
+        <a href="javascript:void(0);" class="btn btn-outline-dark" onclick="sound('Stop')">Stop</a>
+    </div>
+    <div>volume</div>
+    <div>radio_name</div>
+    <div>radio_logo</div>
+    <div>now_playing</div>
+    <div>author</div>
+    <div>back</div>
+
+
+
+    <script type="text/javascript" src="static/radio.js"></script>
+    
 </div>
 {% endblock %}
+
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    {% set count = namespace(a=1) %}
+    {% for i in albu %}
+    <button class="q" onclick="update('{{i.path}}','{{i.song_name}}')">{{i.song_name}}</button>
+    {% set count.a = count.a + 1 %}
+    {% endfor %}
+</div>
+
+<script>
+    function update(x, y) {
+        $("#play_btn").hide();
+        $("#pause_btn").show();
+        document.getElementById('shit').src = x;
+        document.getElementById("audio").load();
+        document.getElementById("audio").play();
+
+        document.getElementById('name').innerHTML = y;
+    }
+</script>
