@@ -1,8 +1,19 @@
-{%- extends "clean.html" %}
+{%- extends "radio_base.html" %}
 
 {% block radio %}
-<div class="bg-info">
 
+<div class="container">
+    <img src="static/bg2.jpg" class="img-fluid bg-dark" alt="...">
+
+</div>
+
+<div class="container w-25 position-absolute top-0 start-0">
+    <img src="static/vc_logo.webp" class="img-fluid" alt="...">
+
+</div>
+
+
+<div class="position-absolute top-0 start-50 translate-middle-x p-4 p-sm-5">
     <div>radio_switch
         <a href="javascript:void(0);" class="btn btn-outline-dark" onclick="sound('Play')">Play</a>
         <a href="javascript:void(0);" class="btn btn-outline-dark" onclick="sound('Stop')">Stop</a>
@@ -13,12 +24,10 @@
     <div>now_playing</div>
     <div>author</div>
     <div>back</div>
-
-
-
-    <script type="text/javascript" src="static/radio.js"></script>
-    
 </div>
+
+
+<script type="text/javascript" src="static/radio.js"></script>
 {% endblock %}
 
 

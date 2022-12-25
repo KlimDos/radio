@@ -1,0 +1,15 @@
+/* @font-face {
+  font-family: "Pinch My Ride";
+  src: url("static/pinch-my-ride-font/PinchMyRide.ttf.ttf") format("truetype");
+} */
+
+@font-face {
+  font-family: trial;
+  src: url("pricedown-regular/pricedown-regular.ttf");
+}
+
+body {
+  font-family: trial;
+  color: pink;
+  font-size: 40px;
+}
