@@ -1,64 +1,47 @@
-{%- extends "radio_base.html" %}
+{%- extends "radio_base.html" %} {% block playlist %}
+<!-- <audio id="playlist" controls>
+  <source src="static/sample4.ogg" type="audio/ogg" />
+  <source src="static/Symphony.ogg" type="audio/ogg" />
+  Your browser does not support the audio element.
+</audio> -->
 
-{% block radio %}
+{% endblock %} {% block radio %}
 
-
-<div class="card border-0 w-50 overlay-top bg-transparent position-absolute top-0 start-0 ps-5 pt-5">
-    <img src="static/vc_logo.webp" class="card-img w-25" alt="...">
-
+<div
+  class="card border-0 w-50 overlay-top bg-transparent position-absolute top-0 start-0 ps-5 pt-5"
+>
+  <img src="static/vc_logo.webp" class="card-img w-25" alt="..." />
 </div>
 
-
-
-<div class="card border-0 w-75 bg-dark position-absolute top-0 start-50 translate-middle-x p-5">
-    <img src="static/bg2.jpg" class="card-img" alt="...">
-    <div class="card-img-overlay m-0 p-0">
-        <div class="w-50 position-absolute top-50 start-50 translate-middle fs-4 text-center">
-            <div class="d-flex justify-content-between">radio
-                <div>
-                    <a href="javascript:void(0);" class="btn btn-outline-light" onclick="sound('Play')">Play</a>
-                    <a href="javascript:void(0);" class="btn btn-outline-light" onclick="sound('Stop')">Stop</a>
-                </div>
-            </div>
-            <div  class="d-none d-sm-block">volume</div>
-            <div>radio_name</div>
-            <div>radio_logo</div>
-            <div>now_playing</div>
-            <div>author</div>
-            <div>back</div>
+<div
+  class="card border-0 w-75 bg-dark position-absolute top-0 start-50 translate-middle-x p-5"
+>
+  <img src="static/bg2.jpg" class="card-img" alt="..." />
+  <div class="card-img-overlay m-0 p-0">
+    <div
+      class="w-50 position-absolute top-50 start-50 translate-middle fs-4 text-center"
+    >
+      <div class="d-flex justify-content-between">
+        radio
+        <div>
+          <p
+            id="switch"
+            href="javascript:void(0);"
+            class="text-decoration-none"
+            onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
+            >off</p
+          >
         </div>
+      </div>
+      <div class="d-none d-sm-block">volume</div>
+      <div>radio_name</div>
+      <div>radio_logo</div>
+      <div>now_playing</div>
+      <div>author</div>
+      <div>back</div>
     </div>
+  </div>
 </div>
-
-
-
-
-
-
-
-
 
 <script type="text/javascript" src="static/radio.js"></script>
 {% endblock %}
-
-
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    {% set count = namespace(a=1) %}
-    {% for i in albu %}
-    <button class="q" onclick="update('{{i.path}}','{{i.song_name}}')">{{i.song_name}}</button>
-    {% set count.a = count.a + 1 %}
-    {% endfor %}
-</div>
-
-<script>
-    function update(x, y) {
-        $("#play_btn").hide();
-        $("#pause_btn").show();
-        document.getElementById('shit').src = x;
-        document.getElementById("audio").load();
-        document.getElementById("audio").play();
-
-        document.getElementById('name').innerHTML = y;
-    }
-</script>

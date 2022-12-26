@@ -8,3 +8,40 @@
 #                 yield data
 #                 data = fogg.read(1024)
 #     return Response(generate(), mimetype="audio/ogg")
+
+
+          <!-- <a
+            href="javascript:void(0);"
+            class="btn btn-outline-light"
+            onclick="sound('Play','static/grand-theft-auto-gta-vice.ogg')"
+            >Play</a
+          >
+          <a
+            href="javascript:void(0);"
+            class="btn btn-outline-light"
+            onclick="sound('Stop','all')"
+            >Stop</a
+          > -->
+
+
+<!-- 
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  {% set count = namespace(a=1) %} {% for i in albu %}
+  <button class="q" onclick="update('{{i.path}}','{{i.song_name}}')">
+    {{i.song_name}}
+  </button>
+  {% set count.a = count.a + 1 %} {% endfor %}
+</div>
+
+<script>
+  function update(x, y) {
+    $("#play_btn").hide();
+    $("#pause_btn").show();
+    document.getElementById("shit").src = x;
+    document.getElementById("audio").load();
+    document.getElementById("audio").play();
+
+    document.getElementById("name").innerHTML = y;
+  }
+</script> -->
