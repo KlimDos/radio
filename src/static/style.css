@@ -11,11 +11,15 @@
 body {
   font-family: trial;
   color: pink;
-  font-size: 40px;
+  font-size: 4vh; 
   text-shadow: 4px 3px black;
 }
 
 .btn {
     text-shadow: 0px 0px black;
     color: white;
+}
+
+.overlay-top {
+    z-index: 9;
 }
