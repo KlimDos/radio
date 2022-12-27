@@ -11,6 +11,7 @@
 body {
   font-family: trial;
   color: pink; 
+  font-size: small;
   text-shadow: 4px 3px black;
 }
 
@@ -21,4 +22,15 @@ body {
 
 .overlay-top {
     z-index: 9;
+}
+
+@media only screen and (max-width: 992px) {
+  .h-width {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+.big_text {
+  font-size:4rem
 }

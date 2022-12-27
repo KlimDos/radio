@@ -7,40 +7,74 @@
 
 {% endblock %} {% block radio %}
 
-<div
+<div id="logo"
   class="card border-0 w-50 overlay-top bg-transparent position-absolute top-0 start-0 ps-5 pt-5"
 >
   <img src="static/vc_logo.webp" class="card-img w-25" alt="..." />
 </div>
 
-<div
-  class="card border-0 w-75 bg-dark position-absolute top-0 start-50 translate-middle-x p-5"
+<div id="bg_card"
+  class="card w-75 border bg-dark position-absolute top-50 start-50 translate-middle d-none d-lg-block"
 >
   <img src="static/bg2.jpg" class="card-img" alt="..." />
-  <div class="card-img-overlay m-0 p-0">
-    <div
-      class="w-50 position-absolute top-50 start-50 translate-middle fs-4 text-center"
-    >
-      <div class="d-flex justify-content-between">
-        radio
+  
+  </div>
+</div>
+
+<!-- <div id="bg_card_mobile"
+  class="card w-75 border bg-dark position-absolute top-50 start-50 translate-middle d-none d-lg-block"
+>
+  <img src="static/bg2.jpg" class="card-img" alt="..." />
+  
+  </div>
+</div> -->
+
+<div id="menu"
+    class="border position-absolute top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block"
+>
+    <div class="d-flex justify-content-between">
+    radio
         <div>
-          <p
+            <p
             id="switch"
             href="javascript:void(0);"
             class="text-decoration-none"
             onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
-            >off</p
-          >
+            >
+            off
+            </p>
         </div>
-      </div>
-      <div class="d-none d-sm-block">volume</div>
-      <div>radio_name</div>
-      <div>radio_logo</div>
-      <div>now_playing</div>
-      <div>author</div>
-      <div>back</div>
     </div>
-  </div>
+    <div>volume</div>
+    <div>radio_name</div>
+    <div>radio_logo</div>
+    <div>now_playing</div>
+    <div>author</div>
+    <div>back</div>
+</div>
+
+<div id="menu_mobile"
+    class="border position-absolute top-0 start-50 translate-middle-x text-center d-block d-lg-none h-75 w-50 pt-2 big_text"
+>
+    <div class="d-flex justify-content-between">
+    radio
+        <div>
+            <p
+            id="switch_mobile"
+            href="javascript:void(0);"
+            class="text-decoration-none"
+            onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
+            >
+            off
+            </p>
+        </div>
+    </div>
+    <div>volume</div>
+    <div>radio_name</div>
+    <div>radio_logo</div>
+    <div>now_playing</div>
+    <div>author</div>
+    <div>back</div>
 </div>
 
 <script type="text/javascript" src="static/radio.js"></script>

@@ -50,9 +50,11 @@ function change_text(song_path) {
 
   if (state === "on") {
     document.getElementById("switch").innerHTML = "off";
+    document.getElementById("switch_mobile").innerHTML = "off";
     sound("Stop", song_path)
   } else {
     document.getElementById("switch").innerHTML = "on";
+    document.getElementById("switch_mobile").innerHTML = "on";
     sound("Play", song_path)
   }
 
