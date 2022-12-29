@@ -1,9 +1,10 @@
 # constant
 REPO="klimdos/polybank"
+ARTEFACT_VERSION="$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")"
 
 # creating app version
 cat <<EOF > src/.env
-ARTEFACT_VERSION="$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")"
+ARTEFACT_VERSION="${ARTEFACT_VERSION}"
 EOF
 
 # building
