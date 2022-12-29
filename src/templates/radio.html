@@ -1,3 +1,14 @@
+{% block version %}
+<div id="version"
+style="font-family:monospace"
+  class="overlay-top bg-transparent position-absolute top-0 end-0 p-2 m-2"
+>
+{{ build }}
+</div>
+
+{% endblock %}
+
+
 {%- extends "radio_base.html" %} {% block playlist %}
 <!-- <audio id="playlist" controls>
   <source src="static/sample4.ogg" type="audio/ogg" />

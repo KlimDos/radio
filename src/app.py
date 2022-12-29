@@ -1,5 +1,13 @@
 from flask import Flask, render_template, url_for
-import logging
+import logging, sys
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+print(os.environ.get('ARTEFACT_VERSION'))
+
+build = os.environ.get('ARTEFACT_VERSION')
 
 app = Flask(__name__)
 
@@ -16,7 +24,7 @@ def login():
 
 @app.route("/radio")
 def radio():
-    return render_template("radio.html")
+    return render_template("radio.html", build=build)
 
 
 @app.errorhandler(500)
@@ -28,4 +36,4 @@ def server_error(e):
     """.format(e), 500
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run("--build=we")
