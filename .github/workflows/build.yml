@@ -12,6 +12,7 @@ jobs:
       run: |
         ARTEFACT_VERSION=$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/") 
         echo '::set-output name=ARTEFACT_VERSION::$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")'
+        echo "{ARTEFACT_VERSION}={$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")}" >> $GITHUB_ENV
         echo "ARTEFACT_VERSION=${ARTEFACT_VERSION}" > src/.env
     - name: Build image
       run: |
@@ -28,4 +29,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: ${{ secrets.TELEGRAM_TO }}
+        message: ${{ env.ARTEFACT_VERSION }}
