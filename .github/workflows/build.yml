@@ -12,6 +12,9 @@ jobs:
       run: |
         ARTEFACT_VERSION=$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/") 
         echo '::set-output name=ARTEFACT_VERSION::$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")'
+        cat <<EOF > src/.env
+ARTEFACT_VERSION="${ARTEFACT_VERSION}"
+EOF
     - name: Build image
       run: |
         docker build --build-arg Build=${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
