@@ -14,22 +14,22 @@ jobs:
         echo '::set-output name=ARTEFACT_VERSION::$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")'
         echo "{ARTEFACT_VERSION}={$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")}" >> $GITHUB_ENV
         echo "ARTEFACT_VERSION=${ARTEFACT_VERSION}" > src/.env
-#     - name: Build image
-#       run: |
-#         docker build --build-arg Build=${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
-#         -t klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} .
-#         docker tag klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
-#         klimdos/polybank:latest
-#     - name: Push image
-#       run: |
-#         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-#         docker push klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }}
+    - name: Build image
+      run: |
+        docker build --build-arg Build=${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
+        -t klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} .
+        docker tag klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
+        klimdos/polybank:latest
+    - name: Push image
+      run: |
+        docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+        docker push klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }}
     - name: send message telegram
       run: |
         pip3 install telegram-send
         cat << EOF > tlgm.conf
         [telegram]
-        token = secrets.TELEGRAM_TOKEN
+        token = ${{ secrets.DOCKERHUB_USERNAME }}
         chat_id = 242426387
         EOF
         telegram-send --config tlgm.conf "tteesstt"
