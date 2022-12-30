@@ -29,5 +29,3 @@ jobs:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
         message: "${{ env.ARTEFACT_VERSION }}"
-
-${{ env.action_state }}
