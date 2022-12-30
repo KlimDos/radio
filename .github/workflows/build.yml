@@ -28,7 +28,8 @@ jobs:
       run: |
         pip3 install telegram-send
         cat << EOF > tlgm.conf
-        Some line
-        Some other line
+        [telegram]
+        token = secrets.TELEGRAM_TOKEN
+        chat_id = 242426387
         EOF
         telegram-send --config tlgm.conf "tteesstt"
