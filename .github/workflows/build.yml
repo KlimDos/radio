@@ -27,4 +27,8 @@ jobs:
     - name: send message telegram
       run: |
         pip3 install telegram-send
-        telegram-send
+        cat << EOF > tlgm.conf
+        Some line
+        Some other line
+        EOF
+        telegram-send --config tlgm.conf "tteesstt"
