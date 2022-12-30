@@ -32,4 +32,4 @@ jobs:
         token = ${{ secrets.TELEGRAM_TOKEN }}
         chat_id = ${{ secrets.TELEGRAM_TO }}
         EOF
-        telegram-send --config tlgm.conf "tteesstt"
+        telegram-send --config tlgm.conf "${{ steps.version-generator.outputs.ARTEFACT_VERSION }}"
