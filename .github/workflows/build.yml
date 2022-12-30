@@ -11,21 +11,21 @@ jobs:
       id: version-generator
       run: |
         ARTEFACT_VERSION=$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/") 
-        echo '::set-output name=ARTEFACT_VERSION::$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")'
+        echo "{ARTEFACT_VERSION}={$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")}" >> $GITHUB_ENV
         echo "ARTEFACT_VERSION=${ARTEFACT_VERSION}" > src/.env
     - name: Build image
       run: |
-        docker build --build-arg Build=${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
-        -t klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} .
-        docker tag klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
+        docker build --build-arg Build=${{ env.ARTEFACT_VERSION }} \
+        -t klimdos/polybank:${{ env.ARTEFACT_VERSION }} .
+        docker tag klimdos/polybank:${{ env.ARTEFACT_VERSION }} \
         klimdos/polybank:latest
     - name: Push image
       run: |
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-        docker push klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }}
+        docker push klimdos/polybank:${{ env.ARTEFACT_VERSION }}
     - name: send message telegram
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: "${ARTEFACT_VERSION}"
+        message: "${{ env.ARTEFACT_VERSION }}"
