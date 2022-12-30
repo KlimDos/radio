@@ -25,15 +25,6 @@ jobs:
 #         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 #         docker push klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }}
     - name: send message telegram
-      uses: appleboy/telegram-action@master
-      run: env
-      with:
-        to: ${{ secrets.TELEGRAM_TO }}
-        token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: |
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
-            
-            Repository: ${{ github.repository }}
-            
-            $(cat src/.env)
+      run: |
+        pip3 install telegram-send
+        telegram-send
