@@ -11,8 +11,9 @@ jobs:
       id: version-generator
       run: |
         ARTEFACT_VERSION=$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/") 
-        echo "{ARTEFACT_VERSION}={$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")}" >> $GITHUB_ENV
+        echo "{ARTEFACT_VERSION}={$(git describe --long --always | sed -r "s/-(([^-]*-){1}[^-]*)$/.\\1/")}" >> $GITHUB_OUTPUT
         echo "ARTEFACT_VERSION=${ARTEFACT_VERSION}" > src/.env
+        cat src/.env
     - name: Build image
       run: |
         docker build --build-arg Build="${{ env.ARTEFACT_VERSION }}" \
