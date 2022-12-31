@@ -1,15 +1,13 @@
 {% block version %}
-<div id="version"
-style="font-family:monospace"
+<div
+  id="version"
+  style="font-family: monospace"
   class="overlay-top bg-transparent position-absolute top-0 end-0 p-2 m-2"
 >
-{{ build }}
+  {{ build }}
 </div>
 
-{% endblock %}
-
-
-{%- extends "radio_base.html" %} {% block playlist %}
+{% endblock %} {%- extends "radio_base.html" %} {% block playlist %}
 <!-- <audio id="playlist" controls>
   <source src="static/sample4.ogg" type="audio/ogg" />
   <source src="static/Symphony.ogg" type="audio/ogg" />
@@ -18,17 +16,35 @@ style="font-family:monospace"
 
 {% endblock %} {% block radio %}
 
-<div id="logo"
+<div
+  id="logo"
   class="card border-0 w-50 overlay-top bg-transparent position-absolute top-0 start-0 ps-5 pt-5"
 >
   <img src="static/vc_logo.webp" class="card-img w-25" alt="..." />
 </div>
 
-<div id="bg_card"
-  class="card w-75 bg-dark position-absolute top-50 start-50 translate-middle d-none d-lg-block"
+<div
+  class="card w-75 bg-dark position-absolute top-50 start-50 translate-middle d-none d-sm-block"
 >
-  <img src="static/bg2.jpg" class="card-img" alt="..." />
-  
+  <div
+    id="backgroundCard"
+    class="carousel slide carousel-fade"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="static/bg-1.jpg" class="card-img" alt="..." />
+      </div>
+      <div class="carousel-item">
+        <img src="static/bg-2.jpg" class="card-img" alt="..." />
+      </div>
+      <div class="carousel-item">
+        <img src="static/bg-3.jpg" class="card-img" alt="..." />
+      </div>
+      <div class="carousel-item">
+        <img src="static/bg-0.jpg" class="card-img" alt="..." />
+      </div>
+    </div>
   </div>
 </div>
 
@@ -40,52 +56,54 @@ style="font-family:monospace"
   </div>
 </div> -->
 
-<div id="menu"
-    class="position-absolute w-25 top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block"
+<div
+  id="menu"
+  class="position-absolute w-25 top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block"
 >
-    <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between">
     radio
-        <div>
-            <p
-            id="switch"
-            href="javascript:void(0);"
-            class="text-decoration-none"
-            onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
-            >
-            off
-            </p>
-        </div>
+    <div>
+      <p
+        id="switch"
+        href="javascript:void(0);"
+        class="text-decoration-none"
+        onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
+      >
+        off
+      </p>
     </div>
-    <div>volume</div>
-    <div>radio_name</div>
-    <div>radio_logo</div>
-    <div>now_playing</div>
-    <div>author</div>
-    <div>back</div>
+  </div>
+  <div>volume</div>
+  <div>radio_name</div>
+  <div>radio_logo</div>
+  <div>now_playing</div>
+  <div>author</div>
+  <div>back</div>
 </div>
 
-<div id="menu_mobile"
-    class="position-absolute top-0 start-50 translate-middle-x text-center d-block d-lg-none h-75 w-50 pt-2 big_text"
+<div
+  id="menu_mobile"
+  class="position-absolute top-0 start-50 translate-middle-x text-center d-block d-lg-none h-75 w-50 pt-2 big_text"
 >
-    <div class="d-flex justify-content-between">
+  <div class="d-flex justify-content-between">
     radio
-        <div>
-            <p
-            id="switch_mobile"
-            href="javascript:void(0);"
-            class="text-decoration-none"
-            onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
-            >
-            off
-            </p>
-        </div>
+    <div>
+      <p
+        id="switch_mobile"
+        href="javascript:void(0);"
+        class="text-decoration-none"
+        onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
+      >
+        off
+      </p>
     </div>
-    <div>volume</div>
-    <div>radio_name</div>
-    <div>radio_logo</div>
-    <div>now_playing</div>
-    <div>author</div>
-    <div>back</div>
+  </div>
+  <div>volume</div>
+  <div>radio_name</div>
+  <div>radio_logo</div>
+  <div>now_playing</div>
+  <div>author</div>
+  <div>back</div>
 </div>
 
 <script type="text/javascript" src="static/radio.js"></script>
