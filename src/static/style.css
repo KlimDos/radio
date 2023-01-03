@@ -34,3 +34,7 @@ body {
 .big_text {
   font-size:3.6em
 }
+
+.select:hover {
+  background-color: yellow;
+}

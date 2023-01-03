@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7DJWRXDHYQ"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-7DJWRXDHYQ"
+    ></script>
     <script type="text/javascript" src="static/gtag.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -9,7 +12,14 @@
       crossorigin="anonymous"
     ></script>
 
-    <noscript><div><img src="https://mc.yandex.ru/watch/91897800" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript
+      ><div>
+        <img
+          src="https://mc.yandex.ru/watch/91897800"
+          style="position: absolute; left: -9999px"
+          alt=""
+        /></div
+    ></noscript>
     <script type="text/javascript" src="static/yatag.js"></script>
 
     <title>{% block title %}{% endblock %}</title>
@@ -26,9 +36,12 @@
     />
   </head>
 
-  <body class="bg-dark">
-    {% block version %}{% endblock %}
-    {% block radio %}{% endblock %}
+  <body id="body" class="bg-dark">
+
+    {% block version %}{% endblock %} 
+    {% block radio %}{% endblock %} 
     {% block playlist %}{% endblock %}
+
+    <script type="text/javascript" src="static/keyboard.js"></script>
   </body>
 </html>
