@@ -60,35 +60,34 @@
   id="menu"
   class="position-absolute w-25 top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block"
 >
-  <div class="d-flex justify-content-between select">
-    radio
-    <div>
-      <p
-        id="switch"
-        href="javascript:void(0);"
-        class="text-decoration-none"
-        onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
-      >
-        off
-      </p>
-    </div>
+  <div>
+    <span id="menu_radio_switch" class="d-flex justify-content-between select">
+      radio
+      <div>
+        <p
+          id="switch"
+          href="javascript:void(0);"
+          class="text-decoration-none"
+          onclick="change_text('static/grand-theft-auto-gta-vice.ogg')"
+        >
+          off
+        </p>
+      </div></span
+    >
   </div>
-  <div class="select">
-    <div id="result" class="output"></div>
-    volume
-  </div>
-  <div class="select">radio_name</div>
-  <div class="select">radio_logo</div>
-  <div class="select">now_playing</div>
-  <div class="select">author</div>
-  <div class="select">back</div>
+  <div><span id="menu_volume" class="select">volume</span></div>
+  <div><span id="menu_radio_name" class="select">Radio name</span></div>
+  <div><span id="menu_radio_logo" class="select">Radio logo</span></div>
+  <div><span id="menu_now_playing" class="select">Now playing</span></div>
+  <div><span id="menu_author" class="select">Author</span></div>
+  <div><span id="menu_back" class="select">back</span></div>
 </div>
 
 <div
   id="menu_mobile"
   class="position-absolute top-0 start-50 translate-middle-x text-center d-block d-lg-none h-75 w-50 pt-2 big_text"
 >
-  <div class="d-flex justify-content-between">
+  <div id="manu_radio_switch_mobile" class="d-flex justify-content-between">
     radio
     <div>
       <p

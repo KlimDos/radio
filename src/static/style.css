@@ -38,3 +38,6 @@ body {
 .select:hover {
   background-color: yellow;
 }
+.select_key {
+  background-color: yellow;
+}
