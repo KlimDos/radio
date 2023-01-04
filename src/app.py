@@ -3,6 +3,25 @@ import logging, sys
 import os
 from dotenv import load_dotenv
 
+from logging.config import dictConfig
+
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] [%(thread)d] %(levelname)s %(name)s - %(message)s',
+    }},
+    'handlers': {'wsgi': {
+        'class': 'logging.StreamHandler',
+        'stream': 'ext://flask.logging.wsgi_errors_stream',
+        'formatter': 'default'
+    }},
+    'root': {
+        'level': 'INFO',
+        'handlers': ['wsgi']
+    }
+})
+
+
 load_dotenv()
 
 print(os.environ.get('ARTEFACT_VERSION'))
@@ -29,7 +48,7 @@ def radio():
 
 @app.route("/test")
 def test():
-    logging.error(
+    app.logger.error(
 '''[2022-12-22 21:44:28,942] [productionIngestionListenerContainer-1] ERROR com.wiley.wpp.cmh.dcm.platform.packaging.research.flow.ArticlePackageService - [application::dcm-alfresco7-one][applicationEnvironment::perf][instanceId::perf][transactionId::0bfa8d4e-e67a-483f-a15e-cb4538654a29] Error creating vendor zip package
 java.lang.IllegalArgumentException: Property 'modelType' was not found
 at ccp.shared.content.jackson.ContentTypeDeserializer.lambda$findSubType$0(ContentTypeDeserializer.java:52)
