@@ -20,21 +20,26 @@ function sound(item, song_path) {
     // Stop effect in 4 sec
     // Start original track
     setTimeout(function () {
-      radio_fx.pause();
-      console.log("start orig radio");
-      audio = document.createElement("audio");
-      audio.src = "static/grand-theft-auto-gta-vice.ogg";
+      state = document.getElementById("switch").innerHTML;
+      if (state === "on") {
+        radio_fx.pause();
+        console.log("start orig radio");
+        audio = document.createElement("audio");
+        audio.src = "static/grand-theft-auto-gta-vice.ogg";
 
-      //audio = createAudio("src/static/grand-theft-auto-gta-vice.ogg")
-      //audio = new Audio(song_path);
-      timestamp = getRndInteger(0, 6225);
-      console.log(timestamp);
-      audio.currentTime = timestamp;
-      audio.play();
+        //audio = createAudio("src/static/grand-theft-auto-gta-vice.ogg")
+        //audio = new Audio(song_path);
+        timestamp = getRndInteger(0, 6225);
+        console.log(timestamp);
+        audio.currentTime = timestamp;
+        audio.play();}
     }, 3000);
   } else if (item === "Stop") {
     console.log(item);
-    audio.pause();
+    radio_fx.pause();
+    if (typeof audio !== 'undefined') {
+      audio.pause();
+    }
     //audio.currentTime = 0;
   }
 }
