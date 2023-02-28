@@ -87,8 +87,8 @@ function showSelect(move) {
     "menu_radio_switch",
     "menu_volume",
     "menu_radio_name",
-    "menu_radio_logo",
     "menu_now_playing",
+    "menu_radio_logo",
     "menu_author",
     "menu_back",
   ];
