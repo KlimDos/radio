@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, send_from_directory
 import logging, sys
 import os
 from dotenv import load_dotenv
@@ -56,6 +56,11 @@ line3)
     )
     return "check logs...", 200
 
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.errorhandler(500)
 def server_error(e):

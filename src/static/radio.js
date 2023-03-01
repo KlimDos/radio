@@ -1,56 +1,39 @@
-function sound(item, song_path) {
-  if (item === "Play") {
-    console.log(item, song_path);
-    // reload after audio
-    // audio.onended = function () {
-    //   window.location.href = "/delete/" + item;
-    // };
+function sound(mode, song_path) {
+  const radio_fx = document.getElementById("audio1");
+  const audio = document.getElementById("audio2");
+  const fx_duration = 3
+  var switch_state = document.getElementById("switch").innerHTML;
 
-    // Play sound effect before start original track
-    radio_fx = document.createElement("audio");
-    radio_fx.src = "static/radio-fx.ogg";
-    // audio.play();
-    //     createAudio("static/radio-fx.ogg");
-    // Pick random timestamp
-    timestamp_fx = getRndInteger(0, 24);
-    console.log(timestamp_fx);
-    radio_fx.currentTime = timestamp_fx;
+  if (mode === "Play") {
+    console.log(mode);
+    // Calculate from random positions for fx and original track
+    audio.currentTime = Math.floor(Math.random() * audio.duration);
+    radio_fx.currentTime = Math.floor(Math.random() * (radio_fx.duration - fx_duration));
+
+    // Play sound effect before starting the original track
     radio_fx.play();
 
-    // Stop effect in 4 sec
-    // Start original track
-    setTimeout(function () {
-      state = document.getElementById("switch").innerHTML;
-      if (state === "on") {
-        radio_fx.pause();
-        console.log("start orig radio");
-        audio = document.createElement("audio");
-        audio.src = "static/grand-theft-auto-gta-vice.ogg";
-
-        //audio = createAudio("src/static/grand-theft-auto-gta-vice.ogg")
-        //audio = new Audio(song_path);
-        timestamp = getRndInteger(0, 6225);
-        console.log(timestamp);
-        audio.currentTime = timestamp;
-        audio.play();}
+    // Stop effect after <fx_duration> and start original track
+    setTimeout(() => {
+      // Make sure switch still on
+      if(document.getElementById("switch") != null){
+        switch_state = document.getElementById("switch").innerHTML;
+        if (switch_state === "on") {
+          audio.play();
+        }
+      }
+      radio_fx.pause();
     }, 3000);
-  } else if (item === "Stop") {
-    console.log(item);
-    radio_fx.pause();
-    if (typeof audio !== 'undefined') {
-      audio.pause();
-    }
-    //audio.currentTime = 0;
-  }
-}
 
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  } else if (mode === "Stop") {
+    console.log(mode);
+    radio_fx.pause();
+    audio.pause();
+  }
 }
 
 function change_text(song_path) {
   state = document.getElementById("switch").innerHTML;
-  console.log(state);
 
   if (state === "on") {
     document.getElementById("switch").innerHTML = "off";
@@ -63,19 +46,7 @@ function change_text(song_path) {
   }
 }
 
-function createAudio(url) {
-  var audio = document.createElement("audio");
-  audio.src = url;
-  audio.style.display = "none"; //added to fix ios issue
-  audio.autoplay = false; //avoid the user has not interacted with your page issue
-  audio.onended = function () {
-    audio.remove(); //remove after playing to clean the Dom
-  };
-  document.body.appendChild(audio);
-}
-
 var cursor_pos = 1;
-
 function showSelect(move) {
   cursor_pos = cursor_pos + move;
   if (cursor_pos > 7) {
