@@ -45,15 +45,15 @@ function change_text(song_path) {
 let cursor_pos = 1;
 function showSelect(move) {
   cursor_pos += move;
-  if (cursor_pos > 7) {
+  if (cursor_pos > 6) {
     cursor_pos = 0;
   } else if (cursor_pos < 0) {
-    cursor_pos = 7;
+    cursor_pos = 6;
   }
   const ids = [
     "menu_radio_switch",
     "menu_volume",
-    "menu_radio_name",
+    // "menu_radio_name",
     "menu_now_playing",
     "menu_radio_logo",
     "menu_author",

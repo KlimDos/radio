@@ -38,19 +38,20 @@
 
   <div id="menu" class="position-absolute w-25 top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block">
     <div>
-      <span id="menu_radio_switch" class="d-flex justify-content-between select">
-        radio
-        <div>
-          <p id="switch" href="javascript:void(0);" class="text-decoration-none" onclick="change_text('static/grand-theft-auto-gta-vice.ogg')">off</p>
-        </div>
-      </span>
+      <div id="menu_radio_switch" class="d-flex justify-content-between select">
+        <div>radio</div>
+        <div id="switch" href="javascript:void(0);" class="text-decoration-none" onclick="change_text('static/grand-theft-auto-gta-vice.ogg')">off</div>
+      </div>
     </div>
-    <div><span id="menu_volume" class="select">volume</span></div>
-    <div><span id="menu_radio_name" class="select">Radio name</span></div>
-    <div><span id="menu_now_playing" class="select">Now playing</span></div>
-    <div><span id="menu_radio_logo" class="select"><img src="static/k-chat.webp" class="card-img w-50 border" alt="..." /></span></div>
-    <div><span id="menu_author" class="select">Author</span></div>
-    <div><span id="menu_back" class="select">back</span></div>
+    <div id="menu_volume" class="d-flex justify-content-between select">
+      <div>volume</div>
+      <div>4</div>
+    </div>
+    <!-- <div id="menu_radio_name" class="select">Radio name</div> -->
+    <div id="menu_now_playing" class="select">Now playing</div>
+    <div id="menu_radio_logo" class="select"><img src="static/k-chat.webp" class="card-img w-50" alt="..." /></div>
+    <div id="menu_author" class="select">Author</div>
+    <div id="menu_back" class="select">back</div>
   </div>
 
   <div id="menu_mobile" class="position-absolute top-0 start-50 translate-middle-x text-center d-block d-lg-none h-75 w-50 pt-2 big_text">

@@ -36,8 +36,8 @@ body {
 }
 
 .select:hover {
-  background-color: yellow;
+  background-color: black;
 }
 .select_key {
-  background-color: yellow;
+  background-color: white;
 }
