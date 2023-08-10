@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: polybank
+  annotations:
+    github.com/project-slug: KlimDos/polybank
+spec:
+  type: other
+  lifecycle: unknown
+  owner: me
