@@ -17,7 +17,7 @@ jobs:
     - name: Build image
       run: |
         docker build --build-arg Build=${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
-        -t klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} .
+        -t klimdos/radio:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} .
         docker tag klimdos/radio:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
         klimdos/radio:latest
     - name: Push image
