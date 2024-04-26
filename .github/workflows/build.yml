@@ -18,12 +18,12 @@ jobs:
       run: |
         docker build --build-arg Build=${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
         -t klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} .
-        docker tag klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
-        klimdos/polybank:latest
+        docker tag klimdos/radio:${{ steps.version-generator.outputs.ARTEFACT_VERSION }} \
+        klimdos/radio:latest
     - name: Push image
       run: |
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
-        docker push klimdos/polybank:${{ steps.version-generator.outputs.ARTEFACT_VERSION }}
+        docker push klimdos/radio:${{ steps.version-generator.outputs.ARTEFACT_VERSION }}
 #     - name: send message telegram
 #       run: |
 #         pip3 install telegram-send
