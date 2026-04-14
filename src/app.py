@@ -3,6 +3,8 @@ import logging, sys
 import os
 from dotenv import load_dotenv
 
+from carousel_assets import slides_for_flask
+
 from logging.config import dictConfig
 
 dictConfig({
@@ -27,6 +29,7 @@ load_dotenv()
 print(os.environ.get('ARTEFACT_VERSION'))
 
 build = os.environ.get('ARTEFACT_VERSION')
+REPO_URL = os.environ.get('REPO_URL', 'https://github.com/KlimDos/radio')
 
 app = Flask(__name__)
 
@@ -43,7 +46,12 @@ def login():
 
 @app.route("/")
 def radio():
-    return render_template("radio.html", build=build)
+    return render_template(
+        "radio.html",
+        build=build,
+        carousel_slides=slides_for_flask(app.root_path),
+        repo_url=REPO_URL,
+    )
 
 
 @app.route("/test")

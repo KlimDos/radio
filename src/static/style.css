@@ -1,8 +1,3 @@
-/* @font-face {
-  font-family: "Pinch My Ride";
-  src: url("static/pinch-my-ride-font/PinchMyRide.ttf.ttf") format("truetype");
-} */
-
 @font-face {
   font-family: trial;
   src: url("pricedown-regular/pricedown-regular.ttf");
@@ -10,18 +5,18 @@
 
 body {
   font-family: trial;
-  color: pink; 
+  color: pink;
   font-size: small;
   text-shadow: 4px 3px black;
 }
 
 .btn {
-    text-shadow: 0px 0px black;
-    color: white;
+  text-shadow: 0px 0px black;
+  color: white;
 }
 
 .overlay-top {
-    z-index: 9;
+  z-index: 9;
 }
 
 @media only screen and (max-width: 992px) {
@@ -32,12 +27,297 @@ body {
 }
 
 .big_text {
-  font-size:3.6em
+  font-size: 3.6em;
 }
 
-.select:hover {
-  background-color: black;
+.big_text .vc-track-inline {
+  font-size: 0.22em;
 }
+
+.big_text .vc-track-bar-wrap {
+  height: 0.24em;
+}
+
+/* Карусель: фиксированное 16:9, кадр одинаковый для всех слайдов */
+.carousel-card {
+  overflow: hidden;
+}
+
+.carousel-card #backgroundCard {
+  aspect-ratio: 16 / 9;
+  max-height: min(72vh, 640px);
+  width: 100%;
+}
+
+.carousel-inner {
+  border-radius: inherit;
+  height: 100%;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+.carousel-slide-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-shell {
+  border-radius: inherit;
+}
+
+/* Неоновые стрелки карусели */
+.carousel-neon-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 6;
+  width: clamp(2.25rem, 6.5vw, 3.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgba(10, 0, 28, 0.65), transparent);
+  transition: filter 0.18s ease, transform 0.12s ease;
+}
+
+.carousel-neon-arrow--next {
+  right: 0;
+  background: linear-gradient(270deg, rgba(10, 0, 28, 0.65), transparent);
+}
+
+.carousel-neon-arrow--prev {
+  left: 0;
+}
+
+.carousel-neon-arrow:hover {
+  filter: brightness(1.2);
+}
+
+.carousel-neon-arrow:active {
+  transform: scale(0.94);
+}
+
+.carousel-neon-arrow__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 100, 200, 0.5),
+    transparent 72%
+  );
+}
+
+.carousel-neon-arrow:hover .carousel-neon-arrow__glow {
+  opacity: 1;
+}
+
+.carousel-neon-arrow__chev {
+  position: relative;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(255, 100, 200, 0.95)) drop-shadow(3px 3px 0 #000);
+}
+
+.carousel-neon-arrow__chev--left {
+  border-top: 1.25rem solid transparent;
+  border-bottom: 1.25rem solid transparent;
+  border-right: 1.85rem solid #ff6eb4;
+  margin-left: -0.2rem;
+}
+
+.carousel-neon-arrow__chev--right {
+  border-top: 1.25rem solid transparent;
+  border-bottom: 1.25rem solid transparent;
+  border-left: 1.85rem solid #ff6eb4;
+  margin-right: -0.2rem;
+}
+
+/* Громкость: толстые «игровые» шевроны в em — под размер меню */
+.vol-chevron-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0.04em 0.12em;
+  margin: 0;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  vertical-align: middle;
+  transition: transform 0.12s ease, filter 0.15s ease;
+}
+
+.vol-chevron-btn:hover {
+  filter: brightness(1.15) drop-shadow(0 0 10px rgba(255, 100, 200, 0.85));
+}
+
+.vol-chevron-btn:active {
+  transform: scale(0.9);
+}
+
+.vol-digit {
+  min-width: 0.5em;
+  text-align: center;
+}
+
+.vol-chevron {
+  display: block;
+  width: 0;
+  height: 0;
+  filter: drop-shadow(2px 2px 0 #000) drop-shadow(0 0 8px rgba(255, 80, 180, 0.9));
+}
+
+.vol-chevron--left {
+  border-top: 0.28em solid transparent;
+  border-bottom: 0.28em solid transparent;
+  border-right: 0.4em solid currentColor;
+}
+
+.vol-chevron--right {
+  border-top: 0.28em solid transparent;
+  border-bottom: 0.28em solid transparent;
+  border-left: 0.4em solid currentColor;
+}
+
+.select_key .vol-chevron--left {
+  border-right-color: #fff8fd;
+}
+
+.select_key .vol-chevron--right {
+  border-left-color: #fff8fd;
+}
+
+.vol-chevron-btn:focus-visible,
+.carousel-neon-arrow:focus-visible {
+  outline: 2px solid #ff9ede;
+  outline-offset: 3px;
+}
+
+.select {
+  padding: 0.05em 0.1em;
+}
+
+.select.d-flex {
+  align-items: center;
+}
+
+/* Только активная строка — без чёрной «полоски» при hover */
+.select:hover:not(.select_key) {
+  background-color: transparent;
+}
+
+/* Активная строка (клавиатура или наведение мыши) */
 .select_key {
-  background-color: white;
+  background-color: #ff6eb4;
+  color: #ffe8f4;
+  text-shadow: 3px 3px 0 #000;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.vol-meter {
+  pointer-events: auto;
+}
+
+/* Часы Vice City (Майами) — тот же шрифт, что у body */
+.vc-clock-row {
+  justify-content: center;
+}
+
+.vc-clock-digits {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Строка radio: прогресс + время рядом с переключателем */
+.vc-radio-row {
+  flex-wrap: nowrap;
+}
+
+.vc-radio-center {
+  min-width: 0;
+}
+
+.vc-track-bar-wrap {
+  height: 0.32em;
+  min-width: 1.5rem;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 110, 180, 0.45);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.65);
+}
+
+.vc-track-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 1px;
+  background: linear-gradient(90deg, #ff4da6, #ffb3e8);
+  box-shadow: 0 0 12px rgba(255, 80, 180, 0.75);
+  transition: width 0.08s linear;
+}
+
+.vc-track-inline {
+  font-size: 0.38em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.03em;
+  opacity: 0.95;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.select_key .vc-track-bar-fill {
+  background: linear-gradient(90deg, #fff0f8, #ffc8ec);
+  box-shadow: 0 0 10px rgba(255, 240, 255, 0.55);
+}
+
+.select_key .vc-track-bar-wrap {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.vc-repo-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.05;
+}
+
+.vc-repo-link {
+  color: pink !important;
+  font-size: inherit;
+  text-decoration: none;
+  text-shadow: 3px 3px 0 #000;
+}
+
+.vc-repo-link:hover {
+  text-decoration: underline;
+  filter: brightness(1.12);
+}
+
+.select_key .vc-repo-link {
+  color: #fff8fd !important;
+}
+
+/* Логотик станции: только прозрачный фон, без голубой подложки */
+.radio-station-logo {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  background: transparent !important;
+  object-fit: contain;
+  vertical-align: middle;
 }

@@ -1,10 +1,10 @@
+{% extends "radio_base.html" %}
+
 {% block version %}
   <div id="version" class="overlay-top bg-transparent position-absolute top-0 end-0 p-2 m-2" style="font-family: monospace">
-    {{ build }}
+    {{ build or "local" }}
   </div>
 {% endblock %}
-
-{% extends "radio_base.html" %}
 
 {% block playlist %}
 {% endblock %}
@@ -14,61 +14,116 @@
     <img src="static/vc_logo.webp" class="card-img w-25" alt="..." />
   </div>
 
-  <div class="card w-75 bg-dark position-absolute top-50 start-50 translate-middle d-none d-sm-block">
-    <div id="backgroundCard" class="carousel slide carousel-fade" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="static/bg-1.jpg" class="card-img" alt="..." />
-        </div>
-        <div class="carousel-item">
-          <img src="static/bg-2.jpg" class="card-img" alt="..." />
-        </div>
-        <div class="carousel-item">
-          <img src="static/bg-3.jpg" class="card-img" alt="..." />
-        </div>
-        <div class="carousel-item">
-          <img src="static/bg-0.jpg" class="card-img" alt="..." />
+  <div class="card w-75 bg-dark position-absolute top-50 start-50 translate-middle d-none d-sm-block carousel-card">
+    <div class="carousel-shell position-relative">
+      <div
+        id="backgroundCard"
+        class="carousel slide carousel-fade"
+        data-bs-ride="carousel"
+        data-bs-interval="5000"
+        data-bs-keyboard="false"
+        data-bs-touch="true"
+        data-bs-wrap="true"
+      >
+        <div class="carousel-inner">
+          {% for slide in carousel_slides %}
+          <div class="carousel-item{% if loop.first %} active{% endif %}">
+            <img src="{{ url_for('static', filename=slide) }}" class="card-img carousel-slide-img" alt="" loading="{% if loop.first %}eager{% else %}lazy{% endif %}" />
+          </div>
+          {% else %}
+          <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='bg-0.jpg') }}" class="card-img carousel-slide-img" alt="" />
+          </div>
+          {% endfor %}
         </div>
       </div>
+      <button type="button" class="carousel-neon-arrow carousel-neon-arrow--prev" aria-label="Previous slide" onclick="event.stopPropagation(); stepCarousel(-1);">
+        <span class="carousel-neon-arrow__glow" aria-hidden="true"></span>
+        <span class="carousel-neon-arrow__chev carousel-neon-arrow__chev--left" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="carousel-neon-arrow carousel-neon-arrow--next" aria-label="Next slide" onclick="event.stopPropagation(); stepCarousel(1);">
+        <span class="carousel-neon-arrow__glow" aria-hidden="true"></span>
+        <span class="carousel-neon-arrow__chev carousel-neon-arrow__chev--right" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 
-  <audio id="audio1" src="static/radio-fx.ogg"></audio>
-  <audio id="audio2" src="static/grand-theft-auto-gta-vice.ogg"></audio>
+  <audio id="audio1" src="static/radio-fx.ogg" preload="metadata"></audio>
+  <audio id="audio2" src="static/grand-theft-auto-gta-vice.ogg" preload="metadata"></audio>
 
   <div id="menu" class="position-absolute w-25 top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block">
     <div>
-      <div id="menu_radio_switch" class="d-flex justify-content-between select">
-        <div>radio</div>
-        <div id="switch" href="javascript:void(0);" class="text-decoration-none" onclick="change_text('static/grand-theft-auto-gta-vice.ogg')">off</div>
+      <div id="menu_radio_switch" class="d-flex justify-content-between align-items-center select vc-radio-row gap-2">
+        <div class="vc-radio-label flex-shrink-0">radio</div>
+        <div class="vc-radio-center flex-grow-1 d-flex align-items-center gap-2 min-w-0">
+          <div class="vc-track-bar-wrap flex-grow-1" title="Track progress">
+            <div id="track_bar_fill" class="vc-track-bar-fill"></div>
+          </div>
+          <span id="track_pos" class="vc-track-inline flex-shrink-0">--:--</span>
+        </div>
+        <div id="switch" href="javascript:void(0);" class="text-decoration-none flex-shrink-0" onclick="change_text('static/grand-theft-auto-gta-vice.ogg')">off</div>
       </div>
     </div>
     <div id="menu_volume" class="d-flex justify-content-between select">
       <div>volume</div>
-      <div>4</div>
+      <div class="vol-meter d-inline-flex align-items-center gap-1" aria-live="polite" title="Quieter / louder">
+        <button type="button" class="vol-chevron-btn" aria-label="Quieter" onclick="event.stopPropagation(); adjustVolume(-1);">
+          <span class="vol-chevron vol-chevron--left" aria-hidden="true"></span>
+        </button>
+        <span id="volume_level" class="vol-digit">4</span>
+        <button type="button" class="vol-chevron-btn" aria-label="Louder" onclick="event.stopPropagation(); adjustVolume(1);">
+          <span class="vol-chevron vol-chevron--right" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
-    <!-- <div id="menu_radio_name" class="select">Radio name</div> -->
     <div id="menu_now_playing" class="select">Now playing</div>
-    <div id="menu_radio_logo" class="select"><img src="static/k-chat.webp" class="card-img w-50" alt="..." /></div>
-    <div id="menu_author" class="select">Author</div>
-    <div id="menu_back" class="select">back</div>
+    <div id="menu_radio_logo" class="select">
+      <img src="static/k-chat.webp" class="radio-station-logo w-50" alt="" width="255" height="90" />
+    </div>
+    <div id="menu_clock" class="select vc-clock-row text-center" role="timer">
+      <div id="clock_time" class="vc-clock-digits" aria-live="polite">--:--</div>
+    </div>
+    <div id="menu_author" class="select vc-repo-row text-center">
+      <a href="{{ repo_url }}" class="vc-repo-link" target="_blank" rel="noopener noreferrer" title="{{ repo_url }}">repo</a>
+    </div>
   </div>
 
   <div id="menu_mobile" class="position-absolute top-0 start-50 translate-middle-x text-center d-block d-lg-none h-75 w-50 pt-2 big_text">
-    <div id="menu_radio_switch_mobile" class="d-flex justify-content-between">
-      radio
-      <div>
-        <p id="switch_mobile" href="javascript:void(0);" class="text-decoration-none" onclick="change_text('static/grand-theft-auto-gta-vice.ogg')">off</p>
+    <div id="menu_radio_switch_mobile" class="d-flex justify-content-between align-items-center select vc-radio-row gap-1">
+      <div class="vc-radio-label flex-shrink-0">radio</div>
+      <div class="vc-radio-center flex-grow-1 d-flex align-items-center gap-1 min-w-0">
+        <div class="vc-track-bar-wrap flex-grow-1" title="Track progress">
+          <div id="track_bar_fill_mobile" class="vc-track-bar-fill"></div>
+        </div>
+        <span id="track_pos_mobile" class="vc-track-inline flex-shrink-0">--:--</span>
+      </div>
+      <div class="flex-shrink-0">
+        <p id="switch_mobile" href="javascript:void(0);" class="text-decoration-none mb-0" onclick="change_text('static/grand-theft-auto-gta-vice.ogg')">off</p>
       </div>
     </div>
-    <div>volume</div>
-    <div>radio_name</div>
-    <div>radio_logo</div>
-    <div>now_playing</div>
-    <div>author</div>
-    <div>back</div>
+    <div id="menu_volume_mobile" class="d-flex justify-content-between select">
+      <div>volume</div>
+      <div class="vol-meter d-inline-flex align-items-center gap-1" aria-live="polite" title="Quieter / louder">
+        <button type="button" class="vol-chevron-btn" aria-label="Quieter" onclick="event.stopPropagation(); adjustVolume(-1);">
+          <span class="vol-chevron vol-chevron--left" aria-hidden="true"></span>
+        </button>
+        <span id="volume_level_mobile" class="vol-digit">4</span>
+        <button type="button" class="vol-chevron-btn" aria-label="Louder" onclick="event.stopPropagation(); adjustVolume(1);">
+          <span class="vol-chevron vol-chevron--right" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <div id="menu_now_playing_mobile" class="select">now_playing</div>
+    <div id="menu_radio_logo_mobile" class="select">
+      <img src="static/k-chat.webp" class="radio-station-logo w-50" alt="" width="255" height="90" />
+    </div>
+    <div id="menu_clock_mobile" class="select vc-clock-row text-center" role="timer">
+      <div id="clock_time_mobile" class="vc-clock-digits" aria-live="polite">--:--</div>
+    </div>
+    <div id="menu_author_mobile" class="select vc-repo-row text-center">
+      <a href="{{ repo_url }}" class="vc-repo-link" target="_blank" rel="noopener noreferrer" title="{{ repo_url }}">repo</a>
+    </div>
   </div>
-  
+
   <script src="static/radio.js"></script>
-  {% endblock %}
-  
+{% endblock %}
