@@ -49,7 +49,14 @@
   </div>
 
   <audio id="audio1" src="static/radio-fx.ogg" preload="metadata"></audio>
-  <audio id="audio2" src="static/grand-theft-auto-gta-vice.ogg" preload="metadata"></audio>
+  <audio
+    id="audio2"
+    src="static/grand-theft-auto-gta-vice.ogg"
+    preload="metadata"
+    data-captions-src="static/captions/grand-theft-auto-gta-vice.vtt"
+  ></audio>
+
+  <div id="vc-captions" class="vc-captions" hidden aria-live="polite"></div>
 
   <div id="menu" class="position-absolute w-25 top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block">
     <div>
@@ -125,5 +132,6 @@
     </div>
   </div>
 
+  <script src="static/captions.js"></script>
   <script src="static/radio.js"></script>
 {% endblock %}

@@ -19,6 +19,27 @@ body {
   z-index: 9;
 }
 
+/* Субтитры поверх фона, под меню (синхрон с audio2) */
+.vc-captions {
+  position: fixed;
+  left: 50%;
+  bottom: max(12%, env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 6;
+  max-width: min(92vw, 36rem);
+  padding: 0.2em 0.45em;
+  pointer-events: none;
+  text-align: center;
+  font-family: trial, "Arial Black", sans-serif;
+  font-size: clamp(1rem, 2.8vw, 1.65rem);
+  line-height: 1.15;
+  color: #ffe8f4;
+  text-shadow:
+    3px 3px 0 #000,
+    0 0 12px rgba(255, 80, 180, 0.85);
+  white-space: pre-line;
+}
+
 @media only screen and (max-width: 992px) {
   .h-width {
     width: 50%;

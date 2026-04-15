@@ -289,6 +289,10 @@ function initRadioUi() {
     audio.addEventListener("pause", updateTrackPosition);
     audio.addEventListener("seeked", updateTrackPosition);
   }
+
+  if (typeof window.initVcCaptions === "function") {
+    window.initVcCaptions();
+  }
 }
 
 if (document.readyState === "loading") {

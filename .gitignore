@@ -132,3 +132,7 @@ dmypy.json
 .pyre/
 .DS_Store
 # *.ogg
+
+# OpenRouter transcribe script (resume state; do not commit)
+*.progress.json
+*.partial.vtt
