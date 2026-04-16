@@ -328,6 +328,173 @@ body {
   color: #fff8fd !important;
 }
 
+/* Свёрнуто: id + !important, иначе #menu…display:flex перебивает .menu-panel.is-menu-collapsed */
+#menu.menu-panel.is-menu-collapsed,
+#menu_mobile.menu-panel.is-menu-collapsed {
+  display: none !important;
+}
+
+/* Колонка меню по центру (только когда не свёрнуто — иначе снова перебивает none) */
+@media (min-width: 992px) {
+  #menu.menu-panel--full.d-lg-block:not(.is-menu-collapsed) {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 991.98px) {
+  #menu_mobile.menu-panel--full.d-block:not(.is-menu-collapsed) {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Строки меню: подсветка .select_key по ширине текста / содержимого */
+.menu-panel > div:not([id]) {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.menu-panel > .select,
+.menu-panel > div:not([id]) > .select {
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* block-level flex/block + fit-content: каждая строка с новой линии (как раньше), рамка по тексту */
+.menu-panel .select.d-flex {
+  display: flex !important;
+}
+
+.menu-panel .select.vc-repo-row {
+  display: flex !important;
+}
+
+.menu-panel .select.vc-clock-row {
+  display: flex !important;
+}
+
+.menu-panel .select:not(.d-flex):not(.vc-repo-row):not(.vc-clock-row) {
+  display: block;
+}
+
+/* Radio / volume: на всю ширину колонки + зазор между ключом (radio|volume) и значением */
+.menu-panel #menu_radio_switch.select,
+.menu-panel #menu_radio_switch_mobile.select,
+.menu-panel #menu_volume.select,
+.menu-panel #menu_volume_mobile.select {
+  width: 100%;
+  max-width: 100%;
+  align-self: stretch;
+}
+
+.menu-panel .vc-radio-row {
+  gap: 0.4em 1.35em;
+}
+
+.menu-panel #menu_volume.select,
+.menu-panel #menu_volume_mobile.select {
+  gap: 0.4em 1.35em;
+}
+
+/* X — пункт меню «закрыть» */
+.menu-close-row-btn {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-weight: 900;
+  font-size: 1.08em;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: inherit;
+  text-shadow: inherit;
+  cursor: pointer;
+  padding: 0.02em 0.1em;
+  margin: 0;
+}
+
+.menu-close-row-btn:focus-visible {
+  outline: 2px solid #ff9ede;
+  outline-offset: 2px;
+}
+
+/* Мини-виджет: компактная плашка в левом нижнем углу */
+.menu-mini {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.25em 0.7em;
+  font-family: trial, "Arial Black", sans-serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  color: #ffe8f4;
+  background: rgba(10, 0, 28, 0.72);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 110, 180, 0.45);
+  border-radius: 4px;
+  box-shadow:
+    0 0 18px rgba(255, 80, 180, 0.35),
+    inset 0 0 8px rgba(255, 80, 180, 0.08);
+  cursor: pointer;
+  text-shadow: 2px 2px 0 #000;
+  transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.15s ease;
+  user-select: none;
+}
+
+.menu-mini:hover {
+  filter: brightness(1.15);
+  box-shadow:
+    0 0 28px rgba(255, 80, 180, 0.6),
+    inset 0 0 10px rgba(255, 80, 180, 0.12);
+  transform: scale(1.04);
+}
+
+.menu-mini:active {
+  transform: scale(0.96);
+}
+
+.menu-mini.d-none {
+  display: none !important;
+}
+
+.menu-mini__radio {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.menu-mini__status {
+  color: #ff6eb4;
+}
+
+.menu-mini__status--on {
+  color: #7fff7f;
+  text-shadow: 2px 2px 0 #000, 0 0 8px rgba(80, 255, 80, 0.7);
+}
+
+.menu-mini__sep {
+  opacity: 0.35;
+}
+
+.menu-mini__vol {
+  opacity: 0.7;
+  font-size: 0.85em;
+}
+
+.menu-mini__vol-num {
+  min-width: 0.7em;
+  text-align: center;
+}
+
 /* Логотик станции: только прозрачный фон, без голубой подложки */
 .radio-station-logo {
   display: inline-block;

@@ -58,7 +58,10 @@
 
   <div id="vc-captions" class="vc-captions" hidden aria-live="polite"></div>
 
-  <div id="menu" class="position-absolute w-25 top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block">
+  <div id="menu" class="menu-panel menu-panel--full position-absolute w-25 top-50 start-50 translate-middle fs-1 text-center d-none d-lg-block">
+    <div id="menu_close" class="select d-flex justify-content-center align-items-center">
+      <button type="button" class="menu-close-row-btn" aria-label="Свернуть меню" onclick="toggleMenuCollapse()">X</button>
+    </div>
     <div>
       <div id="menu_radio_switch" class="d-flex justify-content-between align-items-center select vc-radio-row gap-2">
         <div class="vc-radio-label flex-shrink-0">radio</div>
@@ -95,7 +98,18 @@
     </div>
   </div>
 
-  <div id="menu_mobile" class="position-absolute top-0 start-50 translate-middle-x text-center d-block d-lg-none h-75 w-50 pt-2 big_text">
+  <div id="menu_mini" class="menu-mini d-none" onclick="toggleMenuCollapse()" role="button" tabindex="0" aria-label="Expand menu">
+    <span class="menu-mini__radio">radio</span>
+    <span id="mini_switch" class="menu-mini__status">off</span>
+    <span class="menu-mini__sep">|</span>
+    <span class="menu-mini__vol">vol</span>
+    <span id="mini_volume" class="menu-mini__vol-num">4</span>
+  </div>
+
+  <div id="menu_mobile" class="menu-panel menu-panel--full position-absolute top-0 start-50 translate-middle-x text-center d-block d-lg-none h-75 w-50 pt-2 big_text">
+    <div id="menu_close_mobile" class="select d-flex justify-content-center align-items-center">
+      <button type="button" class="menu-close-row-btn" aria-label="Свернуть меню" onclick="toggleMenuCollapse()">X</button>
+    </div>
     <div id="menu_radio_switch_mobile" class="d-flex justify-content-between align-items-center select vc-radio-row gap-1">
       <div class="vc-radio-label flex-shrink-0">radio</div>
       <div class="vc-radio-center flex-grow-1 d-flex align-items-center gap-1 min-w-0">

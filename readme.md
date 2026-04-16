@@ -58,6 +58,20 @@ python3 scripts/transcribe_openrouter.py
 
 Output: `src/static/captions/grand-theft-auto-gta-vice.vtt`. Costs follow OpenRouter pricing for the chosen model and total audio length.
 
+### Caption sync (local)
+
+Paths are resolved from the **repository root** if a file is not found from the current directory (so commands work from `scripts/` as well as from the repo root).
+
+- **`scripts/shift_vtt.py`** — add a constant offset (seconds) to every cue if the whole track is early/late:
+
+  `python3 scripts/shift_vtt.py src/static/captions/grand-theft-auto-gta-vice.vtt -o out.vtt --seconds -0.4`
+
+- **`scripts/align_vtt_whisperx.py`** — forced alignment of existing cue text to the **same** audio file (refines boundaries inside each cue window). Install: `pip install whisperx torch torchaudio nltk` (GPU recommended). Example:
+
+  `python3 scripts/align_vtt_whisperx.py src/static/grand-theft-auto-gta-vice.ogg src/static/captions/grand-theft-auto-gta-vice.vtt -o src/static/captions/grand-theft-auto-gta-vice.aligned.vtt`
+
+- **`scripts/normalize_vtt.py`** — structural cleanup (timestamps, overlaps, chunk stitch); see script `--help`.
+
 ## Environment
 
 | Variable            | Meaning                                      |

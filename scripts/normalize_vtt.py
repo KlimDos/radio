@@ -24,6 +24,12 @@ import re
 import shutil
 import sys
 from dataclasses import dataclass
+from pathlib import Path
+
+_SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+from repo_paths import resolve_input_path, resolve_output_path  # noqa: E402
 
 EPS = 1e-3
 MIN_CUE_SEC = 0.04
@@ -228,7 +234,7 @@ def main() -> None:
 
     reset_gap = max(5.0, float(args.reset_gap))
 
-    path = args.input
+    path = resolve_input_path(args.input)
     with open(path, encoding="utf-8") as f:
         raw = f.read()
 
@@ -245,10 +251,10 @@ def main() -> None:
 
     if args.in_place:
         if args.backup:
-            shutil.copy2(path, path + ".bak")
+            shutil.copy2(path, str(path) + ".bak")
         out_path = path
     else:
-        out_path = args.output
+        out_path = resolve_output_path(args.output) if args.output else None
 
     if not out_path:
         sys.stdout.write(out_text)

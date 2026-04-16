@@ -1,4 +1,5 @@
 const MENU_ROWS = [
+  ["menu_close", "menu_close_mobile"],
   ["menu_radio_switch", "menu_radio_switch_mobile"],
   ["menu_volume", "menu_volume_mobile"],
   ["menu_now_playing", "menu_now_playing_mobile"],
@@ -89,6 +90,7 @@ function adjustVolume(delta) {
   if (volumeLevel < 0) volumeLevel = 0;
   applyVolumeToAudios();
   updateVolumeDisplay();
+  if (menuCollapsed) syncMiniWidget();
 }
 
 function randomSeekSeconds(el, reserveEnd) {
@@ -135,6 +137,7 @@ function change_text() {
     if (swm) swm.textContent = "off";
     sound("Stop");
     updateTrackPosition();
+    if (menuCollapsed) syncMiniWidget();
     return;
   }
 
@@ -143,6 +146,7 @@ function change_text() {
   if (swm) swm.textContent = "on";
   sound("Play");
   updateTrackPosition();
+  if (menuCollapsed) syncMiniWidget();
 }
 
 function applyMenuHighlight() {
@@ -189,9 +193,12 @@ function wireMenuRowsMouse() {
 }
 
 function menuActivate() {
+  const n = MENU_ROWS.length;
   if (cursor_pos === 0) {
+    toggleMenuCollapse();
+  } else if (cursor_pos === 1) {
     change_text();
-  } else if (cursor_pos === MENU_ROWS.length - 1) {
+  } else if (cursor_pos === n - 1) {
     const row =
       document.getElementById("menu_author") || document.getElementById("menu_author_mobile");
     const link = row && row.querySelector("a.vc-repo-link");
@@ -303,6 +310,45 @@ if (document.readyState === "loading") {
 
 function getMenuCursorPos() {
   return cursor_pos;
+}
+
+let menuCollapsed = false;
+
+function toggleMenuCollapse() {
+  menuCollapsed = !menuCollapsed;
+
+  const menu = document.getElementById("menu");
+  const menuMobile = document.getElementById("menu_mobile");
+  const mini = document.getElementById("menu_mini");
+
+  if (menuCollapsed) {
+    if (menu) menu.classList.add("is-menu-collapsed");
+    if (menuMobile) menuMobile.classList.add("is-menu-collapsed");
+    if (mini) {
+      mini.classList.remove("d-none");
+      syncMiniWidget();
+    }
+  } else {
+    if (mini) mini.classList.add("d-none");
+    if (menu) menu.classList.remove("is-menu-collapsed");
+    if (menuMobile) menuMobile.classList.remove("is-menu-collapsed");
+  }
+}
+
+window.toggleMenuCollapse = toggleMenuCollapse;
+
+function syncMiniWidget() {
+  const sw = document.getElementById("switch");
+  const miniSw = document.getElementById("mini_switch");
+  const miniVol = document.getElementById("mini_volume");
+  if (miniSw && sw) {
+    const on = sw.textContent.trim() === "on";
+    miniSw.textContent = on ? "on" : "off";
+    miniSw.classList.toggle("menu-mini__status--on", on);
+  }
+  if (miniVol) {
+    miniVol.textContent = String(volumeLevel);
+  }
 }
 
 function stepCarousel(direction) {

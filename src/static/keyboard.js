@@ -1,3 +1,7 @@
+/** Индексы MENU_ROWS в radio.js: 0 close, 1 radio, 2 volume, … */
+const MENU_ROW_RADIO = 1;
+const MENU_ROW_VOLUME = 2;
+
 function radioKeydownHandler(event) {
   const t = event.target;
   if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) {
@@ -22,14 +26,14 @@ function radioKeydownHandler(event) {
   }
 
   if (event.key === "[") {
-    if (pos === 1) {
+    if (pos === MENU_ROW_VOLUME) {
       event.preventDefault();
       adjustVolume(-1);
     }
     return;
   }
   if (event.key === "]") {
-    if (pos === 1) {
+    if (pos === MENU_ROW_VOLUME) {
       event.preventDefault();
       adjustVolume(1);
     }
@@ -38,9 +42,9 @@ function radioKeydownHandler(event) {
 
   if (event.key === "ArrowLeft") {
     event.preventDefault();
-    if (pos === 0 && typeof change_text === "function") {
+    if (pos === MENU_ROW_RADIO && typeof change_text === "function") {
       change_text();
-    } else if (pos === 1) {
+    } else if (pos === MENU_ROW_VOLUME) {
       adjustVolume(-1);
     } else if (typeof stepCarousel === "function") {
       stepCarousel(-1);
@@ -49,9 +53,9 @@ function radioKeydownHandler(event) {
   }
   if (event.key === "ArrowRight") {
     event.preventDefault();
-    if (pos === 0 && typeof change_text === "function") {
+    if (pos === MENU_ROW_RADIO && typeof change_text === "function") {
       change_text();
-    } else if (pos === 1) {
+    } else if (pos === MENU_ROW_VOLUME) {
       adjustVolume(1);
     } else if (typeof stepCarousel === "function") {
       stepCarousel(1);
