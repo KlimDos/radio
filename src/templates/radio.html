@@ -28,11 +28,11 @@
         <div class="carousel-inner">
           {% for slide in carousel_slides %}
           <div class="carousel-item{% if loop.first %} active{% endif %}">
-            <img src="{{ url_for('static', filename=slide) }}" class="card-img carousel-slide-img" alt="" loading="{% if loop.first %}eager{% else %}lazy{% endif %}" />
+            <img src="{{ url_for('static', filename=slide) }}" class="carousel-slide-img" alt="" loading="{% if loop.first %}eager{% else %}lazy{% endif %}" />
           </div>
           {% else %}
           <div class="carousel-item active">
-            <img src="{{ url_for('static', filename='bg-0.jpg') }}" class="card-img carousel-slide-img" alt="" />
+            <img src="{{ url_for('static', filename='bg-0.jpg') }}" class="carousel-slide-img" alt="" />
           </div>
           {% endfor %}
         </div>

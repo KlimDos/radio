@@ -1,4 +1,4 @@
-"""Carousel image paths: prefer pre-normalized 1920×1080 assets when present."""
+"""Carousel image paths: serve original bg-art at native resolution."""
 
 from __future__ import annotations
 
@@ -22,14 +22,6 @@ def raw_slides(static_dir: str) -> list[str]:
 
 
 def slides_for_flask(app_root: str) -> list[str]:
+    """Return slide paths from bg-art at their original resolution."""
     static_dir = os.path.join(app_root, "static")
-    norm_dir = os.path.join(static_dir, "bg-normalized")
-    if os.path.isdir(norm_dir):
-        names = sorted(
-            n
-            for n in os.listdir(norm_dir)
-            if n.lower().endswith((".jpg", ".jpeg", ".webp"))
-        )
-        if names:
-            return [f"bg-normalized/{n}" for n in names]
     return raw_slides(static_dir)

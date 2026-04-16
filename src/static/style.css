@@ -59,31 +59,26 @@ body {
   height: 0.24em;
 }
 
-/* Карусель: фиксированное 16:9, кадр одинаковый для всех слайдов */
+/* Карусель: адаптивная — картинки показываются в натуральных пропорциях (contain) */
 .carousel-card {
   overflow: hidden;
+  background: #0a001c;
 }
 
 .carousel-card #backgroundCard {
-  aspect-ratio: 16 / 9;
-  max-height: min(72vh, 640px);
   width: 100%;
 }
 
 .carousel-inner {
   border-radius: inherit;
-  height: 100%;
-}
-
-.carousel-item {
-  height: 100%;
 }
 
 .carousel-slide-img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-height: min(80vh, 720px);
+  object-fit: contain;
+  background: #0a001c;
 }
 
 .carousel-shell {
